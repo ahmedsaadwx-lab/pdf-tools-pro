@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Tools Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="navbar">
+      <a href="#" class="brand">
+        <span class="brand-mark">P</span>
+        <span class="brand-text" data-key="brandText">PDF Tools Pro</span>
+      </a>
+
+      <div class="nav-right">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-button" id="langButton" aria-haspopup="true" aria-expanded="false">English</button>
+          <ul class="lang-menu" id="langMenu" aria-label="Language options">
+            <li data-lang="en">English</li>
+            <li data-lang="ar">العربية</li>
+            <li data-lang="es">Español</li>
+            <li data-lang="tr">Türkçe</li>
+          </ul>
+        </div>
+        <a href="#pricing" class="button button-secondary" data-key="navCta">Get Started</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <ul class="nav-menu" id="navMenuMain">
+        <li><a href="#pdf-tools" data-key="navTools">PDF Tools</a></li>
+        <li><a href="#upload" data-key="navUpload">Upload</a></li>
+        <li><a href="#why" data-key="navWhy">Why Us</a></li>
+        <li><a href="#pricing" data-key="navPricing">Pricing</a></li>
+        <li><a href="#faq" data-key="navFaq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow" data-key="heroEyebrow">Premium PDF SaaS</span>
+        <h1 data-key="heroTitle">Convert, merge, compress, and manage PDFs with enterprise-grade speed.</h1>
+        <p data-key="heroDescription">PDF Tools Pro offers an all-in-one PDF workflow for teams, freelancers, and ambitious creators. Enjoy premium conversions, powerful compression, and intuitive file control in one polished platform.</p>
+        <div class="hero-actions">
+          <a href="#pdf-tools" class="button button-primary" data-key="heroPrimary">Explore tools</a>
+          <a href="#pricing" class="button button-outline" data-key="heroSecondary">View pricing</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-top">
+          <span data-key="heroBadge">Trusted conversion suite</span>
+          <div class="hero-stat">99.9% <span data-key="heroUptime">uptime</span></div>
+        </div>
+        <p data-key="heroCardText">Accelerate your file work with AI-assisted PDF processing, secure uploads, and lightning-fast downloads.</p>
+        <div class="hero-grid">
+          <div class="hero-grid-item">
+            <strong data-key="heroFeature1">Fast convert</strong>
+            <span data-key="heroFeatureText1">Images, Word, and documents.</span>
+          </div>
+          <div class="hero-grid-item">
+            <strong data-key="heroFeature2">Secure export</strong>
+            <span data-key="heroFeatureText2">Data safe with advanced encryption.</span>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section class="section section-tools" id="pdf-tools">
+      <div class="section-header">
+        <span class="eyebrow" data-key="toolsEyebrow">PDF Tools</span>
+        <h2 data-key="toolsTitle">Premium tools for every PDF workflow.</h2>
+      </div>
+      <div class="tools-grid">
+        <article class="tool-card" data-action="imageToPdf">
+          <h3 data-key="toolImageToPdfTitle">Image to PDF</h3>
+          <p data-key="toolImageToPdfText">Convert JPG, PNG, and scanned images into ready-to-share PDF files.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolPdfToWordTitle">PDF to Word</h3>
+          <p data-key="toolPdfToWordText">Export editable Word documents while keeping formatting intact.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolWordToPdfTitle">Word to PDF</h3>
+          <p data-key="toolWordToPdfText">Save Word files as polished PDFs optimized for modern sharing.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolMergePdfTitle">Merge PDF</h3>
+          <p data-key="toolMergePdfText">Combine multiple files into one elegant PDF package.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolSplitPdfTitle">Split PDF</h3>
+          <p data-key="toolSplitPdfText">Extract pages and create custom documents with ease.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolCompressPdfTitle">Compress PDF</h3>
+          <p data-key="toolCompressPdfText">Shrink files fast without sacrificing professional quality.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolRemovePagesTitle">Remove PDF Pages</h3>
+          <p data-key="toolRemovePagesText">Delete unwanted pages and keep only the content that matters.</p>
+        </article>
+        <article class="tool-card">
+          <h3 data-key="toolPdfToJpgTitle">PDF to JPG</h3>
+          <p data-key="toolPdfToJpgText">Export sharp images from PDF pages for quick previews and shareable assets.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-upload" id="upload">
+      <div class="upload-panel">
+        <div class="upload-info">
+          <span class="eyebrow" data-key="uploadEyebrow">Drag & drop ready</span>
+          <h2 data-key="uploadTitle">Upload files instantly and see progress in real time.</h2>
+          <p data-key="uploadText">Drop your PDF documents or browse from your device. File size and upload status are updated automatically.</p>
+          <button class="button button-primary" id="uploadButton" data-key="uploadButton">Upload files</button>
+          <p class="upload-hint" data-key="uploadHint">Supports PDF, JPG, PNG up to 20MB.</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-dropzone" id="uploadDropzone" data-key="uploadDropzone">Drag files here or click upload</div>
+          <div class="upload-status" id="uploadStatus">
+            <div class="upload-detail">
+              <span data-key="fileNameLabel">Selected file</span>
+              <strong id="fileName">—</strong>
+            </div>
+            <div class="upload-detail">
+              <span data-key="fileSizeLabel">File size</span>
+              <strong id="fileSize">0 MB</strong>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progressText" data-key="progressText">Waiting for upload…</span>
+            <strong id="progressPercent">0%</strong>
+          </div>
+          <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" hidden />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-why" id="why">
+      <div class="section-header">
+        <span class="eyebrow" data-key="whyEyebrow">Why Choose Us</span>
+        <h2 data-key="whyTitle">Built for performance, security, and modern conversion workflows.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <strong data-key="whyFastTitle">Fast conversion</strong>
+          <p data-key="whyFastText">Instant results with optimized engines that keep your process moving.</p>
+        </div>
+        <div class="why-card">
+          <strong data-key="whySecurityTitle">Military-grade security</strong>
+          <p data-key="whySecurityText">Encrypted transfers and secure storage for every document upload.</p>
+        </div>
+        <div class="why-card">
+          <strong data-key="whyAiTitle">AI-powered optimization</strong>
+          <p data-key="whyAiText">Smart compression and formatting tools reduce manual cleanup.</p>
+        </div>
+        <div class="why-card">
+          <strong data-key="whyCloudTitle">Cloud processing</strong>
+          <p data-key="whyCloudText">Scale without limits using fast cloud-based document handling.</p>
+        </div>
+        <div class="why-card">
+          <strong data-key="whyFreeTitle">Free tools available</strong>
+          <p data-key="whyFreeText">Try essential PDF functions at no cost before upgrading.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-stats">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <strong data-key="statsFiles">10M+</strong>
+          <span data-key="statsFilesText">files converted</span>
+        </div>
+        <div class="stat-card">
+          <strong data-key="statsUsers">500K+</strong>
+          <span data-key="statsUsersText">users</span>
+        </div>
+        <div class="stat-card">
+          <strong data-key="statsUptime">99.9%</strong>
+          <span data-key="statsUptimeText">uptime</span>
+        </div>
+        <div class="stat-card">
+          <strong data-key="statsGlobal">Global</strong>
+          <span data-key="statsGlobalText">availability</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-pricing" id="pricing">
+      <div class="section-header">
+        <span class="eyebrow" data-key="pricingEyebrow">Pricing plans</span>
+        <h2 data-key="pricingTitle">Choose the plan that grows with your workflow.</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <p class="plan-name" data-key="freePlanName">Free</p>
+          <div class="plan-price">$0<span>/mo</span></div>
+          <ul>
+            <li data-key="freePlanFeature1">5 conversions per day</li>
+            <li data-key="freePlanFeature2">Basic upload tools</li>
+            <li data-key="freePlanFeature3">Community support</li>
+          </ul>
+          <a href="#contact" class="button button-outline" data-key="freePlanButton">Start free</a>
+        </div>
+        <div class="pricing-card premium">
+          <p class="plan-name" data-key="proPlanName">Pro</p>
+          <div class="plan-price">$19<span>/mo</span></div>
+          <ul>
+            <li data-key="proPlanFeature1">Unlimited conversions</li>
+            <li data-key="proPlanFeature2">Faster processing</li>
+            <li data-key="proPlanFeature3">Priority email support</li>
+          </ul>
+          <a href="#contact" class="button button-primary" data-key="proPlanButton">Go Pro</a>
+        </div>
+        <div class="pricing-card">
+          <p class="plan-name" data-key="businessPlanName">Business</p>
+          <div class="plan-price">$39<span>/mo</span></div>
+          <ul>
+            <li data-key="businessPlanFeature1">Team management</li>
+            <li data-key="businessPlanFeature2">Advanced security</li>
+            <li data-key="businessPlanFeature3">White-glove support</li>
+          </ul>
+          <a href="#contact" class="button button-outline" data-key="businessPlanButton">Contact sales</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-testimonials">
+      <div class="section-header">
+        <span class="eyebrow" data-key="testimonialsEyebrow">Testimonials</span>
+        <h2 data-key="testimonialsTitle">Loved by creators and teams worldwide.</h2>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <p data-key="testimonialText1">"The fastest PDF experience I have used. Every upload feels secure, and the results are flawless."</p>
+          <strong data-key="testimonialName1">Aya M. — Product Manager</strong>
+        </article>
+        <article class="testimonial-card">
+          <p data-key="testimonialText2">"A polished toolset that makes converting and sharing documents effortless for our remote team."</p>
+          <strong data-key="testimonialName2">Luis G. — Freelance Designer</strong>
+        </article>
+        <article class="testimonial-card">
+          <p data-key="testimonialText3">"Premium UI and smart automation helped us save time managing large reports and contracts."</p>
+          <strong data-key="testimonialName3">Emre T. — Operations Lead</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-faq" id="faq">
+      <div class="section-header">
+        <span class="eyebrow" data-key="faqEyebrow">FAQ</span>
+        <h2 data-key="faqTitle">Frequently asked questions about PDF Tools Pro.</h2>
+      </div>
+      <div class="faq-grid">
+        <article class="faq-item">
+          <button class="faq-question" data-key="faqQuestion1">Can I use PDF Tools Pro for free?</button>
+          <div class="faq-answer" data-key="faqAnswer1">Yes. The Free plan includes essential PDF operations and is ideal to try before upgrading.</div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-question" data-key="faqQuestion2">Is file upload secure?</button>
+          <div class="faq-answer" data-key="faqAnswer2">Absolutely. We use encrypted processing and temporary storage to keep your documents protected.</div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-question" data-key="faqQuestion3">Do you support large batch uploads?</button>
+          <div class="faq-answer" data-key="faqAnswer3">Yes. Business customers can process larger files and batches with priority cloud resources.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="ad-section" aria-label="Ad placeholder">
+      <div class="ad-banner">
+        <span data-key="adPlaceholder">AdSense-ready premium placement</span>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <p class="footer-title" data-key="footerBrand">PDF Tools Pro</p>
+        <p class="footer-copy" data-key="footerCopy">Secure, fast, and elegant PDF tools built for modern creators.</p>
+      </div>
+      <div class="footer-links-grid">
+        <a href="#" data-key="privacyPolicy">Privacy Policy</a>
+        <a href="#" data-key="termsOfService">Terms of Service</a>
+        <a href="#contact" data-key="footerContact">Contact</a>
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">L</a>
+          <a href="#" aria-label="Instagram">I</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
