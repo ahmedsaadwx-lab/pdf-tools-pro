@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نسيت كلمة المرور — PDF Tools Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="navbar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">P</span>
+        <span class="brand-text" data-key="brandText">PDF Tools Pro</span>
+      </a>
+      <div class="nav-right">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-button" id="langButton" type="button" aria-haspopup="true" aria-expanded="false">العربية</button>
+          <ul class="lang-menu" id="langMenu">
+            <li data-lang="ar">العربية</li>
+            <li data-lang="en">English</li>
+            <li data-lang="es">Español</li>
+            <li data-lang="tr">Türkçe</li>
+          </ul>
+        </div>
+        <button class="lang-button" id="themeToggle" type="button" data-key="themeToggle" aria-pressed="false">داكن/فاتح</button>
+        <a href="login.html" class="button button-outline">تسجيل الدخول</a>
+      </div>
+    </nav>
+    <h2>استعادة كلمة المرور</h2>
+    <form id="forgotForm">
+      <div id="authMessage" class="auth-message"></div>
+      <label>البريد الإلكتروني<input type="email" id="forgotEmail" required></label>
+      <div style="margin-top:12px;display:flex;gap:8px;">
+        <button class="button button-primary" type="submit">إرسال رابط الاستعادة</button>
+        <a href="login.html" class="button button-outline">العودة</a>
+      </div>
+    </form>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
