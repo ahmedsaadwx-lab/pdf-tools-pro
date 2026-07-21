@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ماسح المستندات — PDF Tools Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .scanner-preview-container {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+    .scanner-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface-soft);
+      display: flex;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      touch-action: none;
+    }
+    #scannerCanvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .scanner-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 800px;
+      background: var(--surface-panel);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--surface-border);
+    }
+    .scanner-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      width: 100%;
+      max-width: 800px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--surface-soft);
+      border: 1px solid var(--surface-border);
+      margin-bottom: 12px;
+    }
+    .status-badge.ready {
+      color: #86efac;
+      border-color: rgba(134, 239, 172, 0.3);
+    }
+    .status-badge.loading {
+      color: var(--muted);
+    }
+    .status-badge.error {
+      color: #ff8f8f;
+      border-color: rgba(255, 143, 143, 0.3);
+    }
+    .corrected-preview-container {
+      margin-top: 32px;
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .corrected-image-wrapper {
+      width: 100%;
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+    .corrected-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .scanner-meta {
+        grid-template-columns: 1fr;
+      }
+      .scanner-actions {
+        flex-direction: column;
+      }
+      .scanner-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="brand"><span class="brand-mark">P</span><span class="brand-text">PDF Tools Pro</span></a>
+    <div class="nav-right">
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-button" id="langButton" type="button" aria-haspopup="true" aria-expanded="false">العربية</button>
+        <ul class="lang-menu" id="langMenu">
+          <li data-lang="ar">العربية</li>
+          <li data-lang="en">English</li>
+        </ul>
+      </div>
+      <button class="lang-button" id="themeToggle" type="button" data-key="themeToggle" aria-pressed="false">داكن/فاتح</button>
+      <a href="index.html" class="button button-outline">الرئيسية</a>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <h2>ماسح المستندات</h2>
+    <p>قم برفع صورة، سحبها وإفلاتها، لصقها، أو استخدام الكاميرا لمسح المستندات.</p>
+
+    <section class="section-upload">
+      <div class="upload-panel">
+        <div class="upload-info">
+          <div id="opencvStatus" class="status-badge loading">جاري تحميل OpenCV.js...</div>
+          <button class="button button-primary" id="uploadButton">ارفع صورة / استخدام الكاميرا</button>
+          <p class="upload-hint">يدعم JPG, JPEG, PNG, WEBP. يمكنك أيضاً لصق الصورة (Ctrl+V).</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-dropzone" id="uploadDropzone">اسحب الصورة هنا أو انقر للرفع</div>
+
+          <div id="scannerPreviewArea" class="scanner-preview-container hidden">
+            <div class="scanner-canvas-wrapper">
+              <canvas id="scannerCanvas"></canvas>
+            </div>
+
+            <div class="scanner-meta">
+              <div class="upload-detail"><span>اسم الملف</span><strong id="scannerFileName">—</strong></div>
+              <div class="upload-detail"><span>الأبعاد الأصلية</span><strong id="scannerDimensions">—</strong></div>
+              <div class="upload-detail"><span>الحجم</span><strong id="scannerFileSize">—</strong></div>
+            </div>
+
+            <div class="scanner-actions">
+              <button class="button button-outline" id="autoDetectButton" disabled>تعرف تلقائي</button>
+              <button class="button button-outline" id="resetCornersButton">إعادة ضبط</button>
+              <button class="button button-primary" id="applyPerspectiveButton">تصحيح المنظور</button>
+              <button class="button button-outline" id="replaceImageButton">استبدال الصورة</button>
+              <button class="button button-secondary" id="clearImageButton" style="background: rgba(255, 87, 87, 0.16); color: #ff8f8f; border-color: rgba(255, 87, 87, 0.2);">مسح الصورة</button>
+            </div>
+
+            <div id="correctedArea" class="corrected-preview-container hidden">
+              <h3>المستند المصحح</h3>
+              <div class="corrected-image-wrapper">
+                <img id="correctedImage" src="" alt="Corrected Document" />
+              </div>
+            </div>
+          </div>
+
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" capture="environment" hidden />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script async src="https://docs.opencv.org/4.x/opencv.js" onload="onOpenCvReady();" onerror="onOpenCvError();"></script>
+  <script src="script.js"></script>
+</body>
+</html>

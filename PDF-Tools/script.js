@@ -93,6 +93,8 @@ const translations = {
     toolRemovePagesText: 'Delete unwanted pages and keep only the content that matters.',
     toolPdfToJpgTitle: 'PDF to JPG',
     toolPdfToJpgText: 'Export sharp images from PDF pages for quick previews and shareable assets.',
+    toolScannerTitle: 'Document Scanner',
+    toolScannerText: 'Scan documents using your camera or upload images for processing.',
     uploadEyebrow: 'Drag & drop ready',
     uploadTitle: 'Upload files instantly and see progress in real time.',
     uploadText: 'Drop your documents or browse from your device. File size and upload status are updated automatically.',
@@ -182,6 +184,8 @@ const translations = {
     toolRemovePagesText: 'احذف الصفحات غير المرغوب فيها واحتفظ بالمحتوى المهم.',
     toolPdfToJpgTitle: 'PDF إلى JPG',
     toolPdfToJpgText: 'استخرج صور عالية الجودة من صفحات PDF.',
+    toolScannerTitle: 'ماسح المستندات',
+    toolScannerText: 'قم برفع صورة أو استخدام الكاميرا لمسح المستندات ضوئياً.',
     uploadEyebrow: 'جاهز للسحب والإفلات',
     uploadTitle: 'حمّل الملفات فوراً وشاهد التقدم في الوقت الحقيقي.',
     uploadText: 'ضع مستنداتك هنا أو اختر من جهازك. يتم تحديث حجم الملف وحالته تلقائياً.',
@@ -580,6 +584,17 @@ function handleFile(fileList) {
   const isCompressPage = window.location.pathname.includes('compress-pdf.html');
   const isWordToPdfPage = window.location.pathname.includes('word-to-pdf.html');
   const isPdfToWordPage = window.location.pathname.includes('pdf-to-word.html');
+  const isScannerPage = window.location.pathname.includes('scanner.html');
+
+  if (isScannerPage) {
+    const file = fileList[0];
+    if (supportedImageTypes.includes(file.type)) {
+      handleScannerFile(file);
+    } else {
+      showToast('يرجى اختيار صورة صالحة (JPG, PNG, WEBP).', 'error');
+    }
+    return;
+  }
 
   if (mergeMode) {
     mergeMode = false;
@@ -2071,6 +2086,79 @@ async function compressPdf(file) {
     console.error(err);
     showToast('PDF compression failed — backend recommended');
   }
+}
+
+// Phase 1: Document Scanner handlers
+function handleScannerFile(file) {
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const previewImage = document.getElementById('scannerPreviewImage');
+    const previewArea = document.getElementById('scannerPreviewArea');
+    const dropzone = document.getElementById('uploadDropzone');
+
+    if (previewImage && previewArea && dropzone) {
+      previewImage.src = e.target.result;
+      previewArea.classList.remove('hidden');
+      dropzone.classList.add('hidden');
+
+      // Meta info
+      const fileNameEl = document.getElementById('scannerFileName');
+      const fileSizeEl = document.getElementById('scannerFileSize');
+      const dimensionsEl = document.getElementById('scannerDimensions');
+
+      if (fileNameEl) fileNameEl.textContent = file.name || 'Pasted Image';
+      if (fileSizeEl) fileSizeEl.textContent = formatFileSize(file.size);
+
+      // Get dimensions
+      const img = new Image();
+      img.onload = () => {
+        if (dimensionsEl) dimensionsEl.textContent = `${img.width} x ${img.height}`;
+      };
+      img.src = e.target.result;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+// Paste support
+window.addEventListener('paste', (event) => {
+  if (window.location.pathname.includes('scanner.html')) {
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf('image') !== -1) {
+        const file = item.getAsFile();
+        handleScannerFile(file);
+        break;
+      }
+    }
+  }
+});
+
+// Replace/Clear Scanner Image
+const replaceImageButton = document.getElementById('replaceImageButton');
+const clearImageButton = document.getElementById('clearImageButton');
+
+if (replaceImageButton) {
+  replaceImageButton.addEventListener('click', () => {
+    if (fileInput) fileInput.click();
+  });
+}
+
+if (clearImageButton) {
+  clearImageButton.addEventListener('click', () => {
+    const previewArea = document.getElementById('scannerPreviewArea');
+    const dropzone = document.getElementById('uploadDropzone');
+    const previewImage = document.getElementById('scannerPreviewImage');
+
+    if (previewArea && dropzone && previewImage) {
+      previewArea.classList.add('hidden');
+      dropzone.classList.remove('hidden');
+      previewImage.src = '';
+      if (fileInput) fileInput.value = '';
+    }
+  });
 }
 
 // PDF to JPG conversion
